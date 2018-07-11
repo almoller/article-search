@@ -10,7 +10,7 @@ import API from "./utils/API";
 
 class App extends Component {
   state = {
-    result: {},
+    result: {response:{docs:[]}},
     search: "",
     startYear: "",
     endYear: ""
@@ -18,13 +18,17 @@ class App extends Component {
 
   componentDidMount() {
     this.searchArticles("trump", "2017", "2017");
-      console.log("this.state.result: \n  --" + this.state.result);
-      console.log("this.state.result.response: \n  --" + this.state.result.response);
+      
   };
 
   searchArticles = (query, start, end) => {
     API.search(query, start, end)
-      .then(res => this.setState({ result: res.data }))
+      .then(res => {this.setState({ result: res.data });
+      console.log("pub_date: \n  --" + JSON.stringify(this.state.result.response.docs[0].pub_date));
+      console.log("headline: \n  --" + JSON.stringify(this.state.result.response.docs[0].headline.main));
+      console.log("url: \n  --" + JSON.stringify(this.state.result.response.docs[0].web_url));
+
+  })
       .catch(err => console.log(err));  
   };
 
@@ -47,15 +51,7 @@ class App extends Component {
       console.log("---------------------------")
       console.log("Search Term: \n   --" + this.state.search);
       console.log("Start/End Year: \n   --" + this.state.startYear + " - " + this.state.endYear);
-      console.log("this.state.result.response.docs[0].headline.main:   \n  --" + this.state.result.response.docs[0].headline.main);
   };
-
-  // handleResponse() {
-  //     var answer3=this.state.result;
-  //     console.log("Search Term_3: " + this.state.search);
-  //     console.log("'answer3.response.docs[0].headline.main': " + answer3.response.docs[0].headline.main);
-    
-  // }
 
 
   render() {
@@ -78,19 +74,13 @@ class App extends Component {
           </Col>
           <Col size="sm-6 md-8">
             <Card heading="Articles">
+            {this.state.result.response.docs.map(article => (
               <ArticlesDisplay
-                id="articleSection"
-                // title="Pretend this is a Headline"
-                title={this.state.result.cheesmonster}
-                // date="1974-07-18T00:00:00Z"
-                date={this.state.result.docs}
-                url="https://www.headline-access-url"
-                // title={this.state.result.headline}
-                // startValue={this.state.startYear}
-                // endValue={this.state.endYear}
-                // handleInputChange={this.handleInputChange}
-                // handleFormSubmit={this.handleFormSubmit}
-              />
+              title={article.headline.main}
+              date={article.pub_date}
+              url={article.web_url}
+            />
+            ))}
             </Card>
           </Col>
         </Row>
