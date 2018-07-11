@@ -1,7 +1,7 @@
 import React from "react";
 
 const ArticlesDisplay = props => (
-  <div className="text-center" id="articleSection">
+  <div className="text-center" key={props.id}>
     <h3><a href={props.url}>{props.title}</a></h3>
     <p className="text-muted">{props.date}</p>
     <hr/>

@@ -74,8 +74,10 @@ class App extends Component {
           </Col>
           <Col size="sm-6 md-8">
             <Card heading="Articles">
-            {this.state.result.response.docs.map(article => (
+            {this.state.result.response.docs.slice(0,5).map(article => (
               <ArticlesDisplay
+              id={article._id}
+              key={article._id}
               title={article.headline.main}
               date={article.pub_date}
               url={article.web_url}
