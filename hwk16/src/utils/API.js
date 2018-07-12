@@ -11,6 +11,15 @@ export default {
                     + "&begin_date=" + start + "0101"
                     + "&end_date=" + end + "1231")
         
+  },
+  getArticles: function() {
+    return axios.get("/api/articles");
+  },
+  deleteArticle: function(id) {
+    return axios.delete("/api/articles/" + id);
+  },
+  saveArticle: function(articleData) {
+    return axios.post("/api/articles", articleData);
   }
 };
 

@@ -5,12 +5,18 @@ import Jumbotron from './components/Jumbotron';
 import Card from './components/Card';
 import SearchForm from './components/SearchForm';
 import ArticlesDisplay from './components/ArticlesDisplay';
+import SavedArticles from './components/SavedArticles';
 import API from "./utils/API";
 
 
 class App extends Component {
   state = {
     result: {response:{docs:[]}},
+    articles: [{
+      _id: 133,
+      title:"Test Headline",
+      url:"www.testURL.com"
+    }],
     search: "",
     startYear: "",
     endYear: ""
@@ -53,6 +59,28 @@ class App extends Component {
       console.log("Start/End Year: \n   --" + this.state.startYear + " - " + this.state.endYear);
   };
 
+  showArticles = () => {
+    API.getArticles()
+      .then(res => this.setState({ articles: res.data}))
+      .catch(err => console.log(err));
+  };
+
+  handleSaveButton = () => {
+    API.saveArticle({
+      title: "this is a test headline",
+      url: "https://www.testurl.com/testing",
+      date: new Date(Date.now())
+    })
+    .then(res => this.showArticles())
+    .catch(err => console.log(err));
+  };
+
+  handleDeleteButton = id => {
+    API.deleteArticle(id)
+      .then(res => this.showArticles())
+      .catch(err => console.log(err));
+  };
+
 
   render() {
     return (
@@ -81,7 +109,23 @@ class App extends Component {
               title={article.headline.main}
               date={article.pub_date}
               url={article.web_url}
+              handleSaveButton={this.handleSaveButton}
             />
+            ))}
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="12">
+            <Card heading="Saved Articles">
+            {this.state.articles.map(article => (
+              <SavedArticles
+                id={article._id}
+                key={article._id} 
+                headline={article.title}
+                url={article.url}
+                handleDeleteButton={this.handleDeleteButton}
+                />
             ))}
             </Card>
           </Col>
