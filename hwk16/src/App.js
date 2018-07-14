@@ -12,19 +12,16 @@ import API from "./utils/API";
 class App extends Component {
   state = {
     result: {response:{docs:[]}},
-    articles: [{
-      _id: 133,
-      title:"Test Headline",
-      url:"www.testURL.com"
-    }],
+    articles: [],
     search: "",
     startYear: "",
-    endYear: ""
+    endYear: "",
+    searchTopic: "trump"
   };
 
   componentDidMount() {
     this.searchArticles("trump", "2017", "2017");
-      
+    this.showArticles();      
   };
 
   searchArticles = (query, start, end) => {
@@ -52,7 +49,8 @@ class App extends Component {
     this.setState({
       search: "",
       startYear: "",
-      endYear: ""
+      endYear: "",
+      searchTopic: this.state.search
     });
       console.log("---------------------------")
       console.log("Search Term: \n   --" + this.state.search);
@@ -65,10 +63,10 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  handleSaveButton = () => {
+  handleSaveButton = (saveTitle, saveURL) => {
     API.saveArticle({
-      title: "this is a test headline",
-      url: "https://www.testurl.com/testing",
+      title: saveTitle,
+      url: saveURL,
       date: new Date(Date.now())
     })
     .then(res => this.showArticles())
@@ -87,6 +85,7 @@ class App extends Component {
       <Container fluid>
         <Jumbotron>
           <h1>New York Times Article Search</h1>
+          {/* <h6><a href="#savedArticles">Saved Articles</a></h6> */}
         </Jumbotron>
         <Row>
           <Col size="sm-6 md-4">
@@ -101,7 +100,8 @@ class App extends Component {
             </Card>
           </Col>
           <Col size="sm-6 md-8">
-            <Card heading="Articles">
+            <Card heading="Articles"
+            topic={this.state.searchTopic}>
             {this.state.result.response.docs.slice(0,5).map(article => (
               <ArticlesDisplay
               id={article._id}
@@ -115,7 +115,7 @@ class App extends Component {
             </Card>
           </Col>
         </Row>
-        <Row>
+        <Row id="savedArticles">
           <Col size="12">
             <Card heading="Saved Articles">
             {this.state.articles.map(article => (

@@ -26,3 +26,19 @@ body {
   color: black;
 }
 
+.card {
+  margin-top: 20px;
+}
+
+.card-header {
+  background-image: url('https://cdn.pixabay.com/photo/2014/10/22/16/38/buildings-498198_1280.jpg');
+  color: #fff;
+  padding: 0;
+}
+
+.card-header h2 {
+  margin: 0;
+  padding: 20px 25px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
