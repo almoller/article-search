@@ -16,11 +16,11 @@ class App extends Component {
     search: "",
     startYear: "",
     endYear: "",
-    searchTopic: "trump"
+    searchTopic: "Wildfires"
   };
 
   componentDidMount() {
-    this.searchArticles("trump", "2017", "2017");
+    this.searchArticles("Wildfires", "2018", "2018");
     this.showArticles();      
   };
 
