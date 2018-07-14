@@ -14,6 +14,7 @@ app.use(express.static("hwk16/build"));
 app.use(routes);
 
 // Connect to the Mongo DB
+mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
 
 app.listen(PORT, function() {
