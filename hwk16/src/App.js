@@ -88,7 +88,7 @@ class App extends Component {
           {/* <h6><a href="#savedArticles">Saved Articles</a></h6> */}
         </Jumbotron>
         <Row>
-          <Col size="sm-6 md-4">
+          <Col size="md-6 lg-4">
             <Card heading="Search a Topic">
               <SearchForm
                 searchValue={this.state.search}
@@ -99,7 +99,7 @@ class App extends Component {
               />
             </Card>
           </Col>
-          <Col size="sm-6 md-8">
+          <Col size="md-6 lg-8">
             <Card heading="Articles"
             topic={this.state.searchTopic}>
             {this.state.result.response.docs.slice(0,5).map(article => (
@@ -130,6 +130,7 @@ class App extends Component {
             </Card>
           </Col>
         </Row>
+        <Row><div className="footer"></div></Row>
       </Container>
     );
   }

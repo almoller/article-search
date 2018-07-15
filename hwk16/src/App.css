@@ -3,13 +3,12 @@ body {
 }
 
 .jumbotron {
-  /* height: 300px; */
   color: #fff;
   font-size: 36pt;
   clear: both; 
   padding: 75px 0; 
   text-align: center;
-  background-image: url('https://cdn.pixabay.com/photo/2014/10/22/16/38/buildings-498198_1280.jpg');
+  background-image: url('./images/buildings.jpg');
   background-size: cover; 
 }
 
@@ -27,11 +26,13 @@ body {
 }
 
 .card {
-  margin-top: 20px;
+  margin: 25px 10px;
+  border: none;
+  box-shadow: 2px 5px 18px;
 }
 
 .card-header {
-  background-image: url('https://cdn.pixabay.com/photo/2014/10/22/16/38/buildings-498198_1280.jpg');
+  background-image: url('./images/buildings.jpg');
   color: #fff;
   padding: 0;
 }
@@ -42,3 +43,10 @@ body {
   background: rgba(0, 0, 0, 0.3);
 }
 
+label {
+  margin-top: 10px;
+}
+
+.footer {
+  height: 75px;
+}
