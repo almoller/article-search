@@ -1,5 +1,5 @@
 {
-  "name": "teststart",
+  "name": "article-search",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "concurrently": "^3.6.0"
+  },
+  "engines": {
+    "node": "8.9.4"
   }
 }
